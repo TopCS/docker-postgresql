@@ -13,3 +13,8 @@ psql -h <containerip> -U docker
 docker run -d -link postgresql:db <otherimage>
 ```
 Use `docker` as username and password.
+
+
+## Extensions
+docker build -t image-name .
+docker run -d -name db-instance -v /data/on/dockerhost:/var/lib/postgresql -e DB_PASSWORD=supersecret image-name
