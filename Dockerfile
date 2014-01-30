@@ -1,7 +1,7 @@
 # PostgreSQL
 
-FROM zumbrunnen/base
-MAINTAINER David Zumbrunnen <zumbrunnen@gmail.com>
+FROM ubuntu:13.10
+MAINTAINER Sebastian Geiger <sebastian.geiger@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DB_PASSWORD docker
