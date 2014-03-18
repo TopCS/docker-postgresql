@@ -1,11 +1,19 @@
-# PostgreSQL
+# VERSION 0.1
+# DOCKER-VERSION  0.9.0
+# AUTHOR:         TopCS
+# DESCRIPTION:    Image with posgres 9.3 and extensions
+# TO_BUILD:       docker build --rm -t postgres-9.3 .
+# TO_RUN:         docker run -d -p 5432:5432 -v /data/postgres:/var/lib/postgresql postgres-9.3
 
+# PostgreSQL
 FROM ubuntu:12.04
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV DB_PASSWORD docker
-#comment to not use apt proxy
-ENV http_proxy = http://192.168.0.45:3142
+ENV DB_USER postgres
+ENV DB_PASSWORD postgres
+
+# apt-cache on 192.168.0.45
+RUN echo 'Acquire::http { Proxy "http://192.168.0.45:3142"; };' >> /etc/apt/apt.conf.d/02proxy
 
 RUN apt-get update
 RUN apt-get install -y wget git build-essential make
@@ -29,6 +37,3 @@ VOLUME ["/var/lib/postgresql"]
 EXPOSE 5432
 
 CMD ["/bin/bash", "/opt/startup.sh"]
-
-#sudo docker build -t topcs/pg93 .
-#sudo docker run -p 5432:5432 -d topcs/pg93
